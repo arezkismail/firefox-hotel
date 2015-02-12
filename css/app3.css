@@ -1,0 +1,76 @@
+html, body {
+  margin: 0;
+ padding: 0.1rem;
+}
+#home{
+  background-color: #5BC0DE;
+border-color: #46B8DA;
+  color:#FFF;
+}
+body {
+  font-size: 1rem;
+  background: #dddddd;
+  border:1px solid black;
+  width:300px;
+}
+
+h1 {
+  margin: 0 0 1rem 0;
+}
+
+p {
+  font-size: inherit;
+}
+
+#conteneur{    
+    margin:auto;   
+
+}
+#googleMap{/**map_canvas*/
+
+border:1px solid black;
+width:300px;
+height:320px;
+/** margin-top:100px;*/
+ }
+#retour{
+  margin-left: 30px;
+}
+ #entete{
+ border:1px solid black;
+width:298px;
+height:50px;
+background-color : #cccccc;
+margin-bottom:10px;
+margin-top: 50px;
+ }
+ #entete h1{
+ margin-top: 1px;
+text-align: center;
+ }
+ div #d{
+ margin-bottom:10px;
+ width:150px;
+ }
+  div #a{
+ margin-bottom:10px;
+ width:150px;
+ }
+ #champs{
+
+ margin-top:10px;
+ <!--border:1px solid black;-->
+ }
+#directions-panel {
+        height: 100%;
+        float: right;
+        width: 150px;
+        overflow: auto;
+}
+
+
+#directions-panel {
+   float: none;
+   width: auto;
+}
+   
