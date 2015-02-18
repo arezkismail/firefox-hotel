@@ -154,6 +154,7 @@ function calcRoute() {
       directionsDisplay.setDirections(response);
     }
   });
+  
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
