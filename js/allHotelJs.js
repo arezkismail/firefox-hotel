@@ -328,12 +328,21 @@ function demarrer(){
       var infowindow2 = new google.maps.Marker({
         map: map,
         position: pos,
-		animation:google.maps.Animation.BOUNCE,
+		//animation:google.maps.Animation.BOUNCE,
         content: 'voilà votre adresse adresse.'
       });
 	    
 		infowindow2.setMap(map);
       //map.setCenter(pos);
+	  //////////////////////////////
+	  var infomarker = new google.maps.InfoWindow({
+  content:'Latitude: ' + pos.lat() + '<br>Longitude: ' + pos.lng()
+  });
+		google.maps.event.addListener(infowindow2, 'click', function() {
+			infomarker.open(map,infowindow2);
+		});
+
+	  ///////////////////////////
 	  
     }, function() {
       handleNoGeolocation(true);
@@ -352,6 +361,8 @@ function handleNoGeolocation(errorFlag) {
     var content = 'Error: Your browser doesn\'t support geolocation.';
   }
 }
+
+
 
 
 
