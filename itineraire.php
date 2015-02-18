@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
         <title>Bienvenu sur l'application de Geolocalisation des hôtels sur paris</title>
         <meta name="description" content="A privileged app stub">
-
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <!--
           viewport allows you to control how mobile browsers will render your content.
           width=device-width tells mobile browsers to render your content across the
@@ -67,7 +66,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="index.html"><span class="glyphicon glyphicon-home"></span>  Home</a></li>
-            <li><a href="itineraire.html"><span class="glyphicon glyphicon-road"></span> Itineraire</a></li>
+            <li><a href="itineraire.php"><span class="glyphicon glyphicon-road"></span> Itineraire</a></li>
             <li><a href="allHotels.html"><span class="glyphicon glyphicon-list"></span> tous les hôtels </a></li>
 			<li> <a href=""> <span class="glyphicon glyphicon-book"></span> Autres </a> </li>
            <li> <a href="myPosition.html"> <span class="glyphicon glyphicon-book"></span> My Position </a> </li>
@@ -77,22 +76,38 @@
       </div>
     </nav>
 	<div id="entete">
-		<h1 id="loc"><i>Itineraire</i></h1>
+		<h1 id="loc"><i><p>Bonjour  !</p></i></h1>
 	</div>
         <div id="containeur"><!--//body-->
 			<div id="champs"><!--//control-->
-				<input type="text"  id="d" onchange="calcRoute();"></br>
-				<input type="text"  id="a" onchange="calcRoute();"></br>
+				<input type="text"  id="d" value="<?php
+
+				if (isset($_GET['locActuel'])){
+					
+				echo $locActuel = $_GET['locActuel']; }
+				else {
+					echo 'position actuelle non définie';
+					}
+				?>" onchange="calcRoute();"></br>
+				
+				
+				
+				
+				<input type="text"  id="a" value="<?php
+
+				if (isset($_GET['locHotel'])){
+					
+				echo $locHotel = $_GET['locHotel']; }
+				else {
+					echo 'Pas encore d\'hôtel ciblé ';
+					}
+				?>" onchange="calcRoute();"></br>
         
-			
+			<center>
          <button onClick="calcRoute();" type="button" class="btn btn-default btn-sm"  id="road">
-          <span class="glyphicon glyphicon-road"></span> Road 
-        </button>
+          <span class="glyphicon glyphicon-road"></span> Démmarer! 
+        </button></center>
       
-      
-         <a href="index.html" class="btn btn-default btn-sm"  id="home">
-          <span class="glyphicon glyphicon-home" ></span> Home
-         </a>
            
 			</div>
 			

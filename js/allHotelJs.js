@@ -7,7 +7,7 @@
 var map, places, infoWindow;
 var markers = [];
 var autocomplete;
-var countryRestrict = { 'country': 'us' };
+var countryRestrict = { 'country': 'fr' };
 var MARKER_PATH = 'https://maps.gstatic.com/intl/en_us/mapfiles/marker_green';
 var hostnameRegexp = new RegExp('^https?://.+?/');
 
@@ -68,8 +68,8 @@ var countries = {
 
 function initialize() {
   var myOptions = {
-    zoom: countries['us'].zoom,
-    center: countries['us'].center,
+    zoom: countries['fr'].zoom,
+    center: countries['fr'].center,
     mapTypeControl: false,
     panControl: false,
     zoomControl: false,
@@ -77,7 +77,7 @@ function initialize() {
   };
 
   map = new google.maps.Map(document.getElementById('map-canvas'), myOptions);
-
+	
   infoWindow = new google.maps.InfoWindow({
       content: document.getElementById('info-content')
       });
@@ -115,6 +115,33 @@ function onPlaceChanged() {
   }
 
 }
+
+
+
+var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+function success(pos) {
+  crd = pos.coords;
+	longitude = crd.longitude;
+	latitude = crd.latitude;
+  console.log('Your current position is:');
+  console.log('Latitude : ' + crd.latitude);
+  console.log('Longitude: ' + crd.longitude);
+  console.log('More or less ' + crd.accuracy + ' meters.');
+};
+
+function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+};
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+
+
+
 
 // Search for hotels in the selected city, within the viewport of the map.
 function search() {
@@ -165,7 +192,7 @@ function setAutocompleteCountry() {
   var country = document.getElementById('country').value;
   if (country == 'all') {
     autocomplete.setComponentRestrictions([]);
-    map.setCenter(new google.maps.LatLng(15, 0));
+    map.setCenter(new google.maps.LatLng(48.6280893, 2.44292110004));
     map.setZoom(2);
   } else {
     autocomplete.setComponentRestrictions({ 'country': country });
@@ -218,7 +245,10 @@ function clearResults() {
 // Get the place details for a hotel. Show the information in an info window,
 // anchored on the marker for the hotel that the user selected.
 function showInfoWindow() {
+
   var marker = this;
+   markerPosition = marker.position;
+	locActuel = 
   places.getDetails({placeId: marker.placeResult.place_id},
       function(place, status) {
         if (status != google.maps.places.PlacesServiceStatus.OK) {
@@ -278,4 +308,45 @@ function buildIWContent(place) {
     document.getElementById('iw-website-row').style.display = 'none';
   }
 }
+
+// ajouté par Karlo 
+
+function itineraire(){
+	var locActuel = '(' + latitude + ', ' + longitude + ')';
+	
+	window.location.href = 'itineraire.php?locActuel=' + locActuel + '&locHotel=' + markerPosition;
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Visualisation de tous les hôtels</title>
+    <title>Visualisation  de tous les hôtels</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="css/allHotelcss.css">
 	<link rel="stylesheet" href="css/bootstrap-theme.css.map">
@@ -36,8 +36,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html"><span class="glyphicon glyphicon-home"></span>  Home</a></li>
-            <li><a href="itineraire.html"><span class="glyphicon glyphicon-road"></span> Itineraire</a></li>
+            <li class="active"><a href="index.html"><span class="glyphicon glyphicon-home"></span>  Accueil</a></li>
+            <li><a href="itineraire.php"><span class="glyphicon glyphicon-road"></span> Itinéraire</a></li>
             <li><a href="allHotels.html"><span class="glyphicon glyphicon-list"></span> tous les hôtels </a></li>
 			<li> <a href=""> <span class="glyphicon glyphicon-book"></span> Autres </a> </li>
            <li> <a href="myPosition.html"> <span class="glyphicon glyphicon-book"></span> My Position </a> </li>
@@ -48,7 +48,7 @@
     </nav>
 
     <div id="findhotels">
-      Find hotels in:
+      Choisir ville
     </div>
 
     <div id="locationField">
@@ -61,7 +61,7 @@
         <option value="au">Australia</option>
         <option value="br">Brazil</option>
         <option value="ca">Canada</option>
-        <option value="fr">France</option>
+        <option value="fr" selected >France</option>
         <option value="de">Germany</option>
         <option value="mx">Mexico</option>
         <option value="nz">New Zealand</option>
@@ -69,7 +69,7 @@
         <option value="za">South Africa</option>
         <option value="es">Spain</option>
         <option value="pt">Portugal</option>
-        <option value="us" selected>U.S.A.</option>
+        <option value="us">U.S.A.</option>
         <option value="uk">United Kingdom</option>
       </select>
     </div>
@@ -105,8 +105,8 @@
           <td id="iw-website"></td>
         </tr>
 		
-		<tr id="iw-website-row" class="iw_table_row">
-          <td class="iw_attribute_name">Iteneraire:</td>
+		<tr id="iw-itineraire-row" class="iw_table_row">
+           <center><button onclick="itineraire()">Itinéraire</button> </center>
           <td id="iw-website"></td>
         </tr>
       </table>
