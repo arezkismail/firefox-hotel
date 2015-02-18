@@ -80,7 +80,7 @@ function initialize() {
 	
   infoWindow = new google.maps.InfoWindow({
       content: document.getElementById('info-content')
-      });
+      });demarrer();
 	  ///////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -317,6 +317,40 @@ function itineraire(){
 	window.location.href = 'itineraire.php?locActuel=' + locActuel + '&locHotel=' + markerPosition;
 	
 	
+}
+
+function demarrer(){
+ if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = new google.maps.LatLng(position.coords.latitude,
+                                       position.coords.longitude);
+
+      var infowindow2 = new google.maps.Marker({
+        map: map,
+        position: pos,
+		animation:google.maps.Animation.BOUNCE,
+        content: 'voilà votre adresse adresse.'
+      });
+	    
+		infowindow2.setMap(map);
+      //map.setCenter(pos);
+	  
+    }, function() {
+      handleNoGeolocation(true);
+    });
+	
+  } else {
+    // Browser doesn't support Geolocation
+    handleNoGeolocation(false);
+  }
+}
+
+function handleNoGeolocation(errorFlag) {
+  if (errorFlag) {
+    var content = 'Error: The Geolocation service failed.';
+  } else {
+    var content = 'Error: Your browser doesn\'t support geolocation.';
+  }
 }
 
 
