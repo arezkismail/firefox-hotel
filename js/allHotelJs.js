@@ -10,6 +10,8 @@ var autocomplete;
 var countryRestrict = { 'country': 'fr' };
 var MARKER_PATH = 'https://maps.gstatic.com/intl/en_us/mapfiles/marker_green';
 var hostnameRegexp = new RegExp('^https?://.+?/');
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
 
 var countries = {
   'au': {
@@ -67,6 +69,7 @@ var countries = {
 };
 
 function initialize() {
+	
   var myOptions = {
     zoom: countries['fr'].zoom,
     center: countries['fr'].center,
@@ -77,6 +80,8 @@ function initialize() {
   };
 
   map = new google.maps.Map(document.getElementById('map-canvas'), myOptions);
+	directionsDisplay = new google.maps.DirectionsRenderer();
+	directionsDisplay.setMap(map);
 	
   infoWindow = new google.maps.InfoWindow({
       content: document.getElementById('info-content')
@@ -118,27 +123,6 @@ function onPlaceChanged() {
 
 
 
-var options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
-};
-
-function success(pos) {
-  crd = pos.coords;
-	longitude = crd.longitude;
-	latitude = crd.latitude;
-  console.log('Your current position is:');
-  console.log('Latitude : ' + crd.latitude);
-  console.log('Longitude: ' + crd.longitude);
-  console.log('More or less ' + crd.accuracy + ' meters.');
-};
-
-function error(err) {
-  console.warn('ERROR(' + err.code + '): ' + err.message);
-};
-
-navigator.geolocation.getCurrentPosition(success, error, options);
 
 
 
@@ -311,12 +295,79 @@ function buildIWContent(place) {
 
 // ajouté par Karlo 
 
+
+
+
 function itineraire(){
+	document.getElementById('findhotels').style.display = 'none';
+	document.getElementById('locationField').style.display = 'none';
+	document.getElementById('controls').style.display = 'none';
+	//document.getElementById('iw-itineraire-row').style.visibility = 'hidden';
+	 //document.getElementById('info-content').style.v = 'none';
 	var locActuel = '(' + latitude + ', ' + longitude + ')';
 	
-	window.location.href = 'itineraire.php?locActuel=' + locActuel + '&locHotel=' + markerPosition;
+	
+   var current_pos = locActuel;
+   var end_pos = markerPosition;
+   var request = {
+      origin:current_pos,
+      destination:end_pos,
+      travelMode: google.maps.TravelMode.DRIVING
+   };
+   
+   directionsService.route(request, function(result, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+         directionsDisplay.setDirections(result);
+      }
+   });
 	
 	
+}
+
+
+
+
+function demarrer(){
+
+
+var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+function success(pos) {
+	
+
+  crd = pos.coords;
+	longitude = crd.longitude;
+	latitude = crd.latitude;
+  console.log('Your current position is:');
+  console.log('Latitude : ' + crd.latitude);
+  console.log('Longitude: ' + crd.longitude);
+  console.log('More or less ' + crd.accuracy + ' meters.');
+  
+  var infowindow2 = new google.maps.Marker({
+	  
+        map: map,
+        position: new google.maps.LatLng(latitude, longitude),
+		animation:google.maps.Animation.Drop,
+        content: 'voilà votre adresse adresse.'
+      });
+	    
+		infowindow2.setMap(map);
+		
+		
+};
+
+function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+};
+
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+
+
 }
 
 function demarrer(){
